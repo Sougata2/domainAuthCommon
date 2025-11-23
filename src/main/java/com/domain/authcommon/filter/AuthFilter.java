@@ -26,7 +26,10 @@ public class AuthFilter extends OncePerRequestFilter {
         }
         String defaultRole = request.getHeader("X-Role");
 
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null, AuthorityUtils.commaSeparatedStringToAuthorityList(defaultRole));
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                username, null,
+                AuthorityUtils.commaSeparatedStringToAuthorityList(defaultRole)
+        );
         SecurityContextHolder.getContext().setAuthentication(auth);
         filterChain.doFilter(request, response);
     }
