@@ -20,17 +20,23 @@ import java.io.IOException;
 public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String username = request.getHeader("X-Username");
-        if (StringUtils.isEmpty(username)) {
-            throw new UsernameNotFoundException("Username not found");
-        }
-        String defaultRole = request.getHeader("X-Role");
+        try {
+            String username = request.getHeader("X-Username");
+            if (StringUtils.isEmpty(username)) {
+                throw new UsernameNotFoundException("Username not found");
+            }
+            String defaultRole = request.getHeader("X-Role");
 
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                username, null,
-                AuthorityUtils.commaSeparatedStringToAuthorityList(defaultRole)
-        );
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        filterChain.doFilter(request, response);
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                    username, null,
+                    AuthorityUtils.commaSeparatedStringToAuthorityList(defaultRole)
+            );
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            filterChain.doFilter(request, response);
+        } catch (UsernameNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
