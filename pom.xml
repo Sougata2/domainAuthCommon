@@ -20,6 +20,15 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+<distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Domain Exceiption</name>
+            <url>https://maven.pkg.github.com/Sougata2/domainException</url>
+        </repository>
+    </distributionManagement>
+         
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
