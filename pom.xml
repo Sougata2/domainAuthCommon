@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.domain</groupId>
-    <artifactId>authCommon</artifactId>
+    <artifactId>auth-common</artifactId>
     <version>0.0.1</version>
-    <name>authCommon</name>
-    <description>authCommon</description>
+    <name>auth-common</name>
+    <description>auth-common</description>
 
     <properties>
         <java.version>21</java.version>
